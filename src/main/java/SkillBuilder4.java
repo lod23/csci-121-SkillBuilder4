@@ -10,9 +10,8 @@
 public class SkillBuilder4 {
 
     private static final int START = 0;
-    private static final int FINDMATCH = 1;
-    private static final int FOUNDMATCH = 2;
-
+    private static final int T_DETECTED = 1;
+    private static final int Y_DETECTED = 2;
 
     public static String findTYPattern(String s) {
         int state = START;
@@ -21,21 +20,21 @@ public class SkillBuilder4 {
         for (int i = 0; i < s.length(); i++) {
             char thisChar = s.charAt(i);
 
-            switch (state){
+            switch (state) {
                 case START:
-                    if (thisChar == 't' || thisChar == 'T'){
-                    startIndex = i;
-                    state = FINDMATCH;
+                    if (thisChar == 't' || thisChar == 'T') {
+                        startIndex = i;
+                        state = T_DETECTED;
                     }
                     break;
 
-                case FINDMATCH:
-                    if (thisChar == 'y' || thisChar == 'Y'){
-                        state = FOUNDMATCH;
+                case T_DETECTED:
+                    if (thisChar == 'y' || thisChar == 'Y') {
+                        state = Y_DETECTED;
                     }
                     break;
 
-                case FOUNDMATCH:
+                case Y_DETECTED:
                     return s.substring(startIndex, i);
             }
         }
